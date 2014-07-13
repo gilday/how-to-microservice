@@ -1,6 +1,6 @@
 package com.johnathangilday;
 
-import com.johnathangilday.jaxrs.GreetingNotFoundExceptionMapper;
+import com.johnathangilday.jaxrs.GreetingApplication;
 import org.glassfish.jersey.jdkhttp.JdkHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -15,8 +15,8 @@ public class JdkHttpServerApp {
 
         URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
 
-        ResourceConfig config = new ResourceConfig(GreetingResource.class, GreetingNotFoundExceptionMapper.class);
+        GreetingApplication app = new GreetingApplication();
 
-        JdkHttpServerFactory.createHttpServer(baseUri, config);
+        JdkHttpServerFactory.createHttpServer(baseUri, ResourceConfig.forApplication(app));
     }
 }

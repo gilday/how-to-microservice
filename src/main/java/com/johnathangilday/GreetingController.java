@@ -8,7 +8,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/greeting")
 @Produces(MediaType.APPLICATION_JSON)
-public class GreetingResource {
+public class GreetingController {
 
     @GET
     public Greeting getGreeting() {

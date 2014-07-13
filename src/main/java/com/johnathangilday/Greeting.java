@@ -1,11 +1,17 @@
 package com.johnathangilday;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Greeting {
 
     private final String message;
     private final String audience;
 
-    public Greeting(String message, String audience) {
+    @JsonCreator
+    public Greeting(
+            @JsonProperty("message") String message,
+            @JsonProperty("audience") String audience) {
         this.message = message;
         this.audience = audience;
     }
