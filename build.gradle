@@ -2,10 +2,10 @@ apply plugin: 'java'
 apply plugin: 'maven'
 
 group = 'com.johnathangilday'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 
 
@@ -27,3 +27,4 @@ dependencies {
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.9.0'
     testCompile group: 'org.glassfish.jersey.test-framework.providers', name: 'jersey-test-framework-provider-jdk-http', version:'2.10.1'
 }
+

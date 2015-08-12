@@ -14,7 +14,7 @@ import javax.ws.rs.ext.Provider;
 public class GreetingNotFoundExceptionMapper implements ExceptionMapper<GreetingNotFoundException> {
 
     @Override
-    public Response toResponse(GreetingNotFoundException e) {
+    public Response toResponse(final GreetingNotFoundException e) {
         return Response
                 .status(Response.Status.NOT_FOUND)
                 .type(MediaType.TEXT_PLAIN)

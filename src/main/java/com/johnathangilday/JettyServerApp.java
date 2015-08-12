@@ -7,14 +7,14 @@ import org.glassfish.jersey.servlet.ServletContainer;
 
 public class JettyServerApp {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
-        int port = 8080;
+        final int port = 8080;
 
-        Server server = new Server(port);
-        ServletContextHandler context = new ServletContextHandler();
+        final Server server = new Server(port);
+        final ServletContextHandler context = new ServletContextHandler();
 
-        ServletHolder holder = new ServletHolder(ServletContainer.class);
+        final ServletHolder holder = new ServletHolder(ServletContainer.class);
         holder.setInitParameter("com.sun.jersey.config.property.packages", "com.johnathangilday");
 
         context.addServlet(holder, "/*");
@@ -24,7 +24,7 @@ public class JettyServerApp {
         try {
             server.start();
             server.join();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }

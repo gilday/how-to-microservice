@@ -12,14 +12,14 @@ import javax.ws.rs.ext.Provider;
 @Produces(MediaType.APPLICATION_JSON)
 public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper mapper;
 
     public ObjectMapperProvider() {
-        objectMapper = new ObjectMapper()
+        mapper = new ObjectMapper()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public ObjectMapper getContext(Class<?> objectType) {
-        return objectMapper;
+    public ObjectMapper getContext(final Class<?> objectType) {
+        return mapper;
     }
 }

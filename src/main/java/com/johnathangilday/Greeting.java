@@ -3,24 +3,40 @@ package com.johnathangilday;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Greeting {
 
-    private final String message;
-    private final String audience;
-
     @JsonCreator
-    public Greeting(
-            @JsonProperty("message") String message,
-            @JsonProperty("audience") String audience) {
+    public static Greeting of(
+            @JsonProperty("message") final String message,
+            @JsonProperty("audience") final String audience) {
+        return new Greeting(message, audience);
+    }
+
+    public final String message;
+    public final String audience;
+
+    private Greeting(final String message, final String audience) {
         this.message = message;
         this.audience = audience;
     }
 
-    public String getMessage() {
-        return message;
+    @Override
+    public int hashCode() {
+        return Objects.hash(message, audience);
     }
 
-    public String getAudience() {
-        return audience;
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        final Greeting other = (Greeting) obj;
+        return Objects.equals(this.message, other.message)
+                && Objects.equals(this.audience, other.audience);
     }
 }

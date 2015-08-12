@@ -24,7 +24,7 @@ public class GreetingControllerTest extends JerseyTest {
     @Test
     public void it_returns_default_greeting() {
         final Greeting greeting = target("greeting").request().get(Greeting.class);
-        assertThat(greeting.getMessage()).isEqualTo("hello");
-        assertThat(greeting.getAudience()).isEqualTo("world");
+        assertThat(greeting.message).isEqualTo("hello");
+        assertThat(greeting.audience).isEqualTo("world");
     }
 }

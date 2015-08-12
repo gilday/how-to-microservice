@@ -12,12 +12,12 @@ public class GreetingController {
 
     @GET
     public Greeting getGreeting() {
-        return new Greeting("hello", "world");
+        return Greeting.of("hello", "world");
     }
 
     @GET
     @Path("/{id}")
-    public Greeting getGreetingById(@PathParam("id") int id) {
+    public Greeting getGreetingById(@PathParam("id") final int id) {
         throw new GreetingNotFoundException(id); // no greetings ever found for this example
     }
 }

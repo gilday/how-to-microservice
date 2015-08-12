@@ -7,7 +7,7 @@ public class GreetingNotFoundException extends RuntimeException {
 
     private final int id;
 
-    public GreetingNotFoundException(int id) {
+    public GreetingNotFoundException(final int id) {
         this.id = id;
     }
     

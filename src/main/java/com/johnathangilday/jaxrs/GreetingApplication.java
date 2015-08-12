@@ -10,7 +10,7 @@ public class GreetingApplication extends Application {
 
     @Override
     public Set<Class<?>> getClasses() {
-        HashSet<Class<?>> set = new HashSet<>();
+        final HashSet<Class<?>> set = new HashSet<>();
         set.add(GreetingController.class);
         set.add(GreetingNotFoundExceptionMapper.class);
         return set;

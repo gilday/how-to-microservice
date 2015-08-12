@@ -9,13 +9,13 @@ import java.net.URI;
 
 public class JdkHttpServerApp {
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
-        int port = 8080;
+        final int port = 8080;
 
-        URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
+        final URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
 
-        GreetingApplication app = new GreetingApplication();
+        final GreetingApplication app = new GreetingApplication();
 
         JdkHttpServerFactory.createHttpServer(baseUri, ResourceConfig.forApplication(app));
     }
