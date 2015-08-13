@@ -13,6 +13,7 @@ public class GreetingApplication extends Application {
         final HashSet<Class<?>> set = new HashSet<>();
         set.add(GreetingController.class);
         set.add(GreetingNotFoundExceptionMapper.class);
+        set.add(ObjectMapperProvider.class);
         return set;
     }
 }

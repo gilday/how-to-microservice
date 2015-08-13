@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+/**
+ * immutable greeting object with static factory and Jackson annotations for un-marshalling
+ */
 public class Greeting {
 
     @JsonCreator
