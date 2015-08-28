@@ -1,6 +1,6 @@
 package com.johnathangilday;
 
-import com.johnathangilday.jaxrs.GreetingApplication;
+import com.johnathangilday.jaxrs.GreetingResourceConfig;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
@@ -18,7 +18,7 @@ public class GreetingControllerTest extends JerseyTest {
         // this allows us to run parallel tests
         forceSet(TestProperties.CONTAINER_PORT, "0");
 
-        return ResourceConfig.forApplication(new GreetingApplication());
+        return ResourceConfig.forApplication(new GreetingResourceConfig());
     }
 
     @Test

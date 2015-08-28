@@ -1,6 +1,6 @@
 package com.johnathangilday;
 
-import com.johnathangilday.jaxrs.GreetingApplication;
+import com.johnathangilday.jaxrs.GreetingResourceConfig;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import org.eclipse.jetty.server.Server;
@@ -22,7 +22,7 @@ public class App {
 
         final int port = config.getInt("port");
         final URI baseUri = UriBuilder.fromUri("http://localhost/").port(port).build();
-        final GreetingApplication app = new GreetingApplication();
+        final GreetingResourceConfig app = new GreetingResourceConfig();
 
         // start jetty
         final Server server = JettyHttpContainerFactory.createServer(baseUri, ResourceConfig.forApplication(app));
