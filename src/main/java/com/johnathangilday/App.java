@@ -6,6 +6,8 @@ import com.typesafe.config.ConfigFactory;
 import org.eclipse.jetty.server.Server;
 import org.glassfish.jersey.jetty.JettyHttpContainerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.UriBuilder;
 import java.io.File;
@@ -17,6 +19,8 @@ import java.util.Optional;
  */
 public class App {
 
+    private static final Logger logger = LoggerFactory.getLogger(App.class);
+
     public static void main(final String[] args) {
         final Config config = config();
 
@@ -25,6 +29,7 @@ public class App {
         final GreetingResourceConfig app = new GreetingResourceConfig();
 
         // start jetty
+        logger.info("listening on port {}", port);
         final Server server = JettyHttpContainerFactory.createServer(baseUri, ResourceConfig.forApplication(app));
         try {
             server.start();
