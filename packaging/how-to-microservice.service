@@ -1,0 +1,12 @@
+[Unit]
+Description=how-to-microservice service
+
+[Service]
+EnvironmentFile=-/etc/sysconfig/how-to-microservice
+ExecStart=/usr/bin/java \$JVM_OPTS -jar /opt/how-to-microservice/how-to-microservice-${version}-all.jar
+User=howtomicroservice
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+

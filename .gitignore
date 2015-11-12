@@ -62,3 +62,8 @@ release.properties
 .gradle
 build/
 
+
+# Vagrant
+
+.vagrant/
+

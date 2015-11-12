@@ -1,0 +1,11 @@
+#
+# This file can be used to set additional arguments to the JVM when starting
+# the how-to-microservice service
+#
+# example:
+#
+# JVM_OPTS="-Djavax.net.ssl.keyStore=/etc/pki/java/my-keystore.jks \
+# -Djavax.net.ssl.keyStorePassword=password \
+# -Djavax.net.ssl.trustStore=/etc/pki/java/my-truststore.jks"
+
+JVM_OPTS="-Dconfig=/etc/how-to-microservice/settings.conf"
