@@ -5,6 +5,23 @@ more or less adheres to the principles of the [12 Factor
 App](http://12factor.net/).
 
 
+*Run as a systemd service*
+
+    # build rpm
+    gradlew clean build rpm
+    # install in CentOS 7 vagrant machine for testing
+    vagrant up
+
+*Run as a docker container*
+
+    # build fat jar
+    gradlew clean build shadowJar
+    # build docker image
+    docker build -t how-to-microservice .
+    # run docker container
+    docker run how-to-microservice
+
+
 ## Jersey for REST
 
 The app embraces Jersey and the JAX-RS API instead of the Servlet API. Avoiding
@@ -81,4 +98,9 @@ with `gradle clean build rpm`, one can use `vagrant up` to create a new CentOS 7
 VirtualBox machine which installs the newly built RPM and runs the daemon.
 VirtualBox forwards traffic from port 8001 to the machine's port 8000 for
 testing the app e.g. `curl http://localhost:8001/greeting`.
+
+
+## docker for container deployments
+
+Included Dockerfile builds an image runs the fat jar in a docker container
 
