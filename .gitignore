@@ -57,13 +57,22 @@ pom.xml.next
 release.properties
 
 
+# Vagrant
+
+.vagrant/
+
+
 # Gradle
 
 .gradle
 build/
 
+# Ignore Gradle GUI config
+gradle-app.setting
 
-# Vagrant
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
 
-.vagrant/
+# Cache of project
+.gradletasknamecache
 

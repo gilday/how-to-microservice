@@ -10,8 +10,8 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
-        classpath 'com.netflix.nebula:gradle-ospackage-plugin:3.1.0'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:3.6.1'
     }
 }
 
@@ -22,8 +22,8 @@ apply plugin: 'nebula.rpm'
 ext {
     versions = [
             jackson: '2.6.3',
-            jersey: '2.22.1',
-            jetty: '9.1.1.v20140108'
+            jersey: '2.23.1',
+            jetty: '9.3.10.v20160621'
     ]
 }
 
@@ -72,7 +72,7 @@ task rpm(type: Rpm) {
     it.dependsOn shadowJar
 
     packageName = project.name
-    version = '0.0.1'
+    version = '0.0.4'
     release = '1.e7'
     os = LINUX
 
