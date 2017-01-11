@@ -10,7 +10,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.3'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
         classpath 'com.netflix.nebula:gradle-ospackage-plugin:3.6.1'
     }
 }
@@ -21,9 +21,9 @@ apply plugin: 'nebula.rpm'
 
 ext {
     versions = [
-            jackson: '2.6.3',
-            jersey: '2.23.1',
-            jetty: '9.2.18.v20160721'
+            jackson: '2.8.5',
+            jersey: '2.25',
+            jetty: '9.4.0.v20161208'
     ]
 }
 
@@ -42,14 +42,14 @@ dependencies {
     // jetty
     compile "org.eclipse.jetty:jetty-server:$versions.jetty"
     // slf4j
-    compile 'org.slf4j:slf4j-api:1.7.7'
+    compile 'org.slf4j:slf4j-api:1.7.22'
     compile 'ch.qos.logback:logback-classic:1.1.3'
     // typesafe config
-    compile 'com.typesafe:config:1.3.0'
+    compile 'com.typesafe:config:1.3.1'
 
     // test
     testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.1.0'
+    testCompile 'org.assertj:assertj-core:3.6.1'
     testCompile 'org.mockito:mockito-all:1.10.19'
     testCompile ("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jdk-http:$versions.jersey") {
         exclude group: 'junit'
