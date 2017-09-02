@@ -22,6 +22,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
         this.mapper = mapper;
     }
 
+    @Override
     public ObjectMapper getContext(final Class<?> objectType) {
         return mapper;
     }

@@ -18,7 +18,7 @@ public class GreetingNotFoundExceptionMapper implements ExceptionMapper<Greeting
         return Response
                 .status(Response.Status.NOT_FOUND)
                 .type(MediaType.TEXT_PLAIN)
-                .entity("There exists no greeting with the id " + e.getId())
+                .entity("There exists no greeting with the id " + e.id)
                 .build();
     }
 }
