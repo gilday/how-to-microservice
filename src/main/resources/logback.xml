@@ -2,14 +2,14 @@
 <configuration>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%-5level  %msg%n</pattern>
+            <pattern>%-5level %msg%n</pattern>
         </encoder>
     </appender>
 
     <!-- quiet, jetty -->
-    <logger name="org.eclipse.jetty" level="WARN" />
+    <logger name="org.eclipse.jetty" level="WARN"/>
 
     <root level="INFO">
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

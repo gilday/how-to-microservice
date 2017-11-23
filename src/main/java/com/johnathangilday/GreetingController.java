@@ -6,18 +6,28 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * Basic JAX-RS endpoint which responds to GET requests with the JSON equivalent of hello, world.
+ */
 @Path("/greeting")
 @Produces(MediaType.APPLICATION_JSON)
 public class GreetingController {
 
-    @GET
-    public Greeting getGreeting() {
-        return Greeting.of("hello", "world");
-    }
+  /** @return "hello, world" JSON equivalent */
+  @GET
+  public Greeting getGreeting() {
+    return Greeting.of("hello", "world");
+  }
 
-    @GET
-    @Path("/{id}")
-    public Greeting getGreetingById(@PathParam("id") final int id) {
-        throw new GreetingNotFoundException(id); // no greetings ever found for this example
-    }
+  /**
+   * For testing exception mappers. Always fails with {@link GreetingNotFoundException}
+   *
+   * @param id ignored
+   * @throws GreetingNotFoundException always
+   */
+  @GET
+  @Path("/{id}")
+  public Greeting getGreetingById(@PathParam("id") final int id) {
+    throw new GreetingNotFoundException(id); // no greetings ever found for this example
+  }
 }

@@ -4,22 +4,24 @@ Perhaps a misnomer, this is a personal reference for a small Java REST app that
 more or less adheres to the principles of the [12 Factor
 App](http://12factor.net/).
 
+The application is packaged to be deployed in one of two ways:
 
-*Run as a systemd service*
+
+*As a systemd service*
 
     # build rpm
-    gradlew clean build rpm
+    gradlew rpm
     # install in CentOS 7 vagrant machine for testing
     vagrant up
 
-*Run as a docker container*
+*As a docker container*
 
     # build fat jar
-    gradlew clean build shadowJar
+    gradlew build shadowJar
     # build docker image
     docker build -t how-to-microservice .
     # run docker container
-    docker run how-to-microservice
+    docker run --rm how-to-microservice
 
 
 ## Jersey for REST
@@ -27,7 +29,7 @@ App](http://12factor.net/).
 The app embraces Jersey and the JAX-RS API instead of the Servlet API. Avoiding
 the servlet API makes the app more portable. Specifically, it allows the Jersey
 Test Framework to use the `JdkHttpServerFactory` which initializes quicker than
-a full servlet container
+a full servlet container.
 
 
 ## Jetty for HTTP
@@ -57,7 +59,7 @@ event streams" as presribed by the 12 Factor App.
 [HK2](https://hk2.java.net) is a light-weight IOC framework (JSR-330) which is
 used internally and exposed by Jersey. While it is possible to use other IOC
 frameworks with Jersey, HK2 does a fine job and doesn't require additional
-dependencies
+dependencies.
 
 
 ## Typesafe Config for Configuration
@@ -67,7 +69,7 @@ light-weight configuration library for JVM apps. It has good support for
 overriding default configuration parameters with external config files or
 environment variables. Its flexibility makes it appropriate for different types
 of deployments such as external configuration files in
-`/etc/how-to-microservice` or environment variables from a PaaS such as Heroku
+`/etc/how-to-microservice` or environment variables from a PaaS such as Heroku.
 
 
 ## shadow for easier deployments
@@ -75,7 +77,7 @@ of deployments such as external configuration files in
 The gradle [shadow](https://github.com/johnrengelman/shadow) plugin enables
 gradle to build one "fat jar" which contains all the app's dependencies. Having
 one jar to deploy is much easier than a dozen. Use `java -jar
-how-to-microservice-0.0.3-all.jar` to run the app
+how-to-microservice-0.0.6.jar` to run the app
 
 
 ## nebula for RPM deployments
@@ -85,7 +87,7 @@ plugin for building RPM distributions. Gradle is configured to build an RPM
 which installs the app as a systemd daemon on Enterprise Linux 7. The RPM does
 the following
 
-* includes Java 8 as a dependency
+* includes Java 11 as a dependency
 * adds an unprivileged user to own the app's files and process
 * installs a systemd unit file to register the app as a systemd daemon
 * installs an external configuration file to
@@ -103,4 +105,3 @@ testing the app e.g. `curl http://localhost:8001/greeting`.
 ## docker for container deployments
 
 Included Dockerfile builds an image runs the fat jar in a docker container
-

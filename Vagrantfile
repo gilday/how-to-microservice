@@ -8,7 +8,7 @@
 Vagrant.configure(2) do |config|
   # use geerlingguy/centos7 instead of centos/7 because the official centos 7
   # box does not work with virtualbox file shares
-  config.vm.box = "geerlingguy/centos7"
+  config.vm.box = "centos/7"
 
   # forward the how-to-microservice port
   config.vm.network "forwarded_port", guest: 8000, host: 8001
