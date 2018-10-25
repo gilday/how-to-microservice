@@ -32,7 +32,6 @@ public class App {
         logger.info("listening on port {}", port);
         final Server server = JettyHttpContainerFactory.createServer(baseUri, ResourceConfig.forApplication(app));
         try {
-            server.start();
             server.join();
         } catch (Exception e) {
             throw new RuntimeException(e);
