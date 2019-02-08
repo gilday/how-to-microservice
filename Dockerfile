@@ -1,8 +1,8 @@
 FROM openjdk:11-jre
 MAINTAINER Johnathan Gilday
 
-COPY ./build/libs/how-to-microservice-0.0.6-all.jar /opt/how-to-microservice/
+ADD ./build/distributions/how-to-microservice-0.0.7.tar /opt
 EXPOSE 8000
-WORKDIR /opt/how-to-microservice
+WORKDIR /opt/how-to-microservice-0.0.7
 
-CMD ["java", "--add-modules", "java.xml.bind", "-jar", "how-to-microservice-0.0.6-all.jar"]
+CMD ["./bin/how-to-microservice"]

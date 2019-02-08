@@ -4,20 +4,24 @@ Perhaps a misnomer, this is a personal reference for a small Java REST app that
 more or less adheres to the principles of the [12 Factor
 App](http://12factor.net/).
 
+*Run*
+
+    ./gradlew run
+
 The application is packaged to be deployed in one of two ways:
 
 
 *As a systemd service*
 
     # build rpm
-    gradlew rpm
+    ./gradlew rpm
     # install in CentOS 7 vagrant machine for testing
     vagrant up
 
 *As a docker container*
 
-    # build fat jar
-    gradlew build shadowJar
+    # build application distribution
+    ./gradlew distTar
     # build docker image
     docker build -t how-to-microservice .
     # run docker container
@@ -72,13 +76,13 @@ of deployments such as external configuration files in
 `/etc/how-to-microservice` or environment variables from a PaaS such as Heroku.
 
 
-## shadow for easier deployments
+## Application plugin for easy deployments
 
-The gradle [shadow](https://github.com/johnrengelman/shadow) plugin enables
-gradle to build one "fat jar" which contains all the app's dependencies. Having
-one jar to deploy is much easier than a dozen. Use `java -jar
-how-to-microservice-0.0.6.jar` to run the app
-
+The standard Gradle Application plugin generates distribution tar and zip files
+which contain the application, its dependencies, and scripts for starting the
+application. The easiest way to use the Application plugin to run the
+application is `./gradlew run`. Use `./gradlew distZip` and `./gradlew distTar`
+to build redistributable packages.
 
 ## nebula for RPM deployments
 
@@ -104,4 +108,5 @@ testing the app e.g. `curl http://localhost:8001/greeting`.
 
 ## docker for container deployments
 
-Included Dockerfile builds an image runs the fat jar in a docker container
+Included Dockerfile builds an image which includes the Application plugin's
+distribution tarball.

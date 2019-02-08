@@ -1,9 +1,7 @@
-
 import com.netflix.gradle.plugins.rpm.Rpm
 
 plugins {
     id("application")
-    id("com.github.johnrengelman.shadow") version "4.0.3"
     id("com.github.sherter.google-java-format") version "0.8"
     id("nebula.ospackage") version "6.1.1" apply false
 }
@@ -78,12 +76,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.shadowJar {
-    mergeServiceFiles()
-}
+val distTar = tasks.named<Tar>("distTar")
 
 val rpm by tasks.registering(Rpm::class) {
-    dependsOn(tasks.shadowJar)
+    dependsOn(distTar)
 
     packageName = project.name
     version = project.version.toString()
@@ -100,12 +96,17 @@ val rpm by tasks.registering(Rpm::class) {
     """.trimMargin())
     postUninstall("systemctl daemon-reload > /dev/null 2>&1")
 
-    from("build/libs") {
-        into("/opt/${project.name}")
-        include("${project.name}-${project.version}.jar")
+    val tarFile = distTar.get().archiveFile // tarTree doesn't support a Provider<RegularFile>
+    val zipTree = tarTree(tarFile)
+    from(zipTree) {
+        into("/opt")
+        eachFile {
+            // strip version from destination directory
+            path = path.replaceFirst("${project.name}-${project.version}", project.name)
+        }
+        exclude("**/*.bat") // exclude Windows files
         user = "howtomicroservice"
         permissionGroup = "howtomicroservice"
-        fileMode = 0x1A4 // octal 0644
     }
 
     from("packaging") {
