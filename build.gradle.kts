@@ -1,6 +1,4 @@
-import com.netflix.gradle.plugins.packaging.CopySpecEnhancement
-import com.netflix.gradle.plugins.packaging.CopySpecEnhancement.permissionGroup
-import com.netflix.gradle.plugins.packaging.CopySpecEnhancement.user
+
 import com.netflix.gradle.plugins.rpm.Rpm
 
 plugins {
@@ -31,7 +29,7 @@ java {
 val jacksonVersion = "2.8.10"
 val jerseyVersion = "2.27"
 val jettyVersion = "9.4.7.v20170914"
-val junitVersion = "4.12"
+val junitVersion = "5.4.0"
 
 dependencies {
 
@@ -61,9 +59,8 @@ dependencies {
     implementation("org.glassfish.jaxb:jaxb-runtime:2.4.0-b180830.0438")
 
     // test
-//    testCompile "org.junit.jupiter:junit-jupiter-api:$versions.junit"
-//    testRuntime "org.junit.jupiter:junit-jupiter-engine:$versions.junit"
-    testCompile("junit:junit:$junitVersion")
+    testCompile("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testCompile("org.assertj:assertj-core:3.6.1")
     testCompile("org.mockito:mockito-all:1.10.19")
     testCompile("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jdk-http:$jerseyVersion") {
@@ -75,6 +72,10 @@ dependencies {
 
 tasks.compileJava {
     options.compilerArgs = listOf("-parameters")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.shadowJar {

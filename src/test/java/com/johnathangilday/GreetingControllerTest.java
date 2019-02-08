@@ -9,14 +9,28 @@ import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Jersey Test Framework starts a new HTTP server for a given {@link Application} and provides a
  * JAX-RS client for making requests to the test server. This test verifies that the greeting
  * endpoint returns the expected JSON result.
  */
-public final class GreetingControllerTest extends JerseyTest {
+final class GreetingControllerTest extends JerseyTest {
+
+  /** delegate to JUnit 4 setUp method in parent class */
+  @BeforeEach
+  void before() throws Exception {
+    setUp();
+  }
+
+  /** delegate to JUnit 4 tearDown method in parent class */
+  @AfterEach
+  void after() throws Exception {
+    tearDown();
+  }
 
   /**
    * {@inheritDoc}
@@ -49,7 +63,7 @@ public final class GreetingControllerTest extends JerseyTest {
    * world response.
    */
   @Test
-  public void it_returns_default_greeting() {
+  void it_returns_default_greeting() {
     final var greeting = target("greeting").request().get(Greeting.class);
     assertThat(greeting.getMessage()).isEqualTo("hello");
     assertThat(greeting.getAudience()).isEqualTo("world");
