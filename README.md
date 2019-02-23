@@ -20,12 +20,10 @@ The application is packaged to be deployed in one of two ways:
 
 *As a docker container*
 
-    # build application distribution
-    ./gradlew distTar
     # build docker image
-    docker build -t how-to-microservice .
+    ./gradlew jibDockerBuilder
     # run docker container
-    docker run --rm how-to-microservice
+    docker run --rm gilday/how-to-microservice
 
 
 ## Jersey for REST
@@ -106,7 +104,10 @@ VirtualBox forwards traffic from port 8001 to the machine's port 8000 for
 testing the app e.g. `curl http://localhost:8001/greeting`.
 
 
-## docker for container deployments
+## jib for container deployments
 
-Included Dockerfile builds an image which includes the Application plugin's
-distribution tarball.
+Project is configured to use [jib](https://github.com/GoogleContainerTools/jib)
+to build a container image pushed to Docker Hub at
+[gilday/how-to-microservice](https://cloud.docker.com/u/gilday/repository/docker/gilday/how-to-microservice).
+To build a test the image with a local docker daemon, use the `jibDockerBuild`
+task.

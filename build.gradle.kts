@@ -4,6 +4,7 @@ plugins {
     id("application")
     id("com.github.sherter.google-java-format") version "0.8"
     id("nebula.ospackage") version "6.1.1" apply false
+    id("com.google.cloud.tools.jib") version "1.0.1"
 }
 
 apply(plugin = "nebula.rpm")
@@ -23,6 +24,8 @@ java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
+
+jib.to.image = "gilday/how-to-microservice"
 
 val jacksonVersion = "2.8.10"
 val jerseyVersion = "2.27"
