@@ -27,9 +27,9 @@ java {
 
 jib.to.image = "gilday/how-to-microservice"
 
-val jacksonVersion = "2.8.10"
-val jerseyVersion = "2.27"
-val jettyVersion = "9.4.7.v20170914"
+val jacksonVersion = "2.9.8"
+val jerseyVersion = "2.28"
+val jettyVersion = "9.4.12.v20180830"
 val junitVersion = "5.4.0"
 
 dependencies {
