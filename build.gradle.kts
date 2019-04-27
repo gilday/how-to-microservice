@@ -4,7 +4,7 @@ plugins {
     id("application")
     id("com.github.sherter.google-java-format") version "0.8"
     id("nebula.ospackage") version "6.1.1" apply false
-    id("com.google.cloud.tools.jib") version "1.0.1"
+    id("com.google.cloud.tools.jib") version "1.1.2"
 }
 
 apply(plugin = "nebula.rpm")

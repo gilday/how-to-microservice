@@ -4,6 +4,8 @@ Perhaps a misnomer, this is a personal reference for a small Java REST app that
 more or less adheres to the principles of the [12 Factor
 App](http://12factor.net/).
 
+[![Build Status](https://travis-ci.com/gilday/how-to-microservice.svg?branch=master)](https://travis-ci.com/gilday/how-to-microservice)
+
 *Run*
 
     ./gradlew run
@@ -108,6 +110,6 @@ testing the app e.g. `curl http://localhost:8001/greeting`.
 
 Project is configured to use [jib](https://github.com/GoogleContainerTools/jib)
 to build a container image pushed to Docker Hub at
-[gilday/how-to-microservice](https://cloud.docker.com/u/gilday/repository/docker/gilday/how-to-microservice).
-To build a test the image with a local docker daemon, use the `jibDockerBuild`
-task.
+[gilday/how-to-microservice](https://hub.docker.com/r/gilday/how-to-microservice).
+Deployments to Docker Hub requires authentication.  To build a test the image
+with a local docker daemon, use the `jibDockerBuild` task.

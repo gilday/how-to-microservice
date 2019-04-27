@@ -1,0 +1,6 @@
+language: java
+dist: xenial # uses jdk 11 by default
+deploy:
+  - provider: script
+    script:
+      - ./gradlew jib -Djib.to.credHelper=$(pwd)/env-cred-helper.sh
