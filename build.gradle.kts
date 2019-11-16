@@ -3,18 +3,16 @@ import com.netflix.gradle.plugins.rpm.Rpm
 plugins {
     id("application")
     id("com.github.sherter.google-java-format") version "0.8"
-    id("nebula.ospackage") version "6.1.1" apply false
+    id("nebula.ospackage") version "8.0.3"
     id("com.google.cloud.tools.jib") version "1.8.0"
 }
-
-apply(plugin = "nebula.rpm")
 
 repositories {
     jcenter()
 }
 
 group = "com.johnathangilday"
-version = "0.0.7"
+version = "0.0.8"
 
 application {
     mainClassName = "com.johnathangilday.App"
@@ -27,10 +25,10 @@ java {
 
 jib.to.image = "gilday/how-to-microservice"
 
-val jacksonVersion = "2.9.8"
-val jerseyVersion = "2.28"
-val jettyVersion = "9.4.12.v20180830"
-val junitVersion = "5.4.0"
+val jacksonVersion = "2.10.1"
+val jerseyVersion = "2.29.1"
+val jettyVersion = "9.4.17.v20190418"
+val junitVersion = "5.5.2"
 
 dependencies {
 
