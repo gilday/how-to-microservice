@@ -2,10 +2,12 @@ package com.johnathangilday;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.johnathangilday.jaxrs.GreetingResource;
 import com.johnathangilday.jaxrs.GreetingResourceConfig;
 import com.johnathangilday.jaxrs.ObjectMapperProvider;
 import javax.ws.rs.core.Application;
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.proxy.WebResourceFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
@@ -18,7 +20,7 @@ import org.junit.jupiter.api.Test;
  * JAX-RS client for making requests to the test server. This test verifies that the greeting
  * endpoint returns the expected JSON result.
  */
-final class GreetingControllerTest extends JerseyTest {
+final class GreetingResourceTest extends JerseyTest {
 
   /** delegate to JUnit 4 setUp method in parent class */
   @BeforeEach
@@ -64,7 +66,9 @@ final class GreetingControllerTest extends JerseyTest {
    */
   @Test
   void it_returns_default_greeting() {
-    final var greeting = target("greeting").request().get(Greeting.class);
+    final var target = target();
+    final var greetings = WebResourceFactory.newResource(GreetingResource.class, target);
+    final var greeting = greetings.get();
     assertThat(greeting.getMessage()).isEqualTo("hello");
     assertThat(greeting.getAudience()).isEqualTo("world");
   }

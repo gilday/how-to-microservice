@@ -12,7 +12,7 @@ repositories {
 }
 
 group = "com.johnathangilday"
-version = "0.0.8"
+version = "0.0.9"
 
 application {
     mainClassName = "com.johnathangilday.App"
@@ -67,6 +67,7 @@ dependencies {
         exclude("junit")
     }
     testImplementation("org.glassfish.jersey.containers:jersey-container-jdk-http:$jerseyVersion")
+    testImplementation("org.glassfish.jersey.ext:jersey-proxy-client:$jerseyVersion")
 }
 
 tasks.compileJava {
