@@ -25,29 +25,22 @@ java {
 
 jib.to.image = "gilday/how-to-microservice"
 
-val jacksonVersion = "2.10.1"
-val jerseyVersion = "2.29.1"
-val jettyVersion = "9.4.17.v20190418"
-val junitVersion = "5.5.2"
-
 dependencies {
-
     // To avoid compiler warnings about @API annotations in JUnit code.
     implementation("org.apiguardian:apiguardian-api:1.0.0")
 
     // jackson
-    implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
-    implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
+    implementation(platform("com.fasterxml.jackson:jackson-bom:2.10.1"))
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    implementation("com.fasterxml.jackson.module:jackson-module-parameter-names")
     // jersey
-    implementation("org.glassfish.jersey.core:jersey-server:$jerseyVersion")
-    implementation("org.glassfish.jersey.inject:jersey-hk2:$jerseyVersion")
-    implementation("org.glassfish.jersey.containers:jersey-container-jetty-http:$jerseyVersion")
-    implementation("org.glassfish.jersey.media:jersey-media-json-jackson:$jerseyVersion") {
-        exclude("com.fasterxml.jackson.core")
-    }
+    implementation(platform("org.glassfish.jersey:jersey-bom:2.29.1"))
+    implementation("org.glassfish.jersey.core:jersey-server")
+    implementation("org.glassfish.jersey.inject:jersey-hk2")
+    implementation("org.glassfish.jersey.containers:jersey-container-jetty-http")
+    implementation("org.glassfish.jersey.media:jersey-media-json-jackson")
     // jetty
-    runtimeOnly("org.eclipse.jetty:jetty-server:$jettyVersion")
+    runtimeOnly("org.eclipse.jetty:jetty-server:9.4.17.v20190418")
     // slf4j
     implementation("org.slf4j:slf4j-api:1.7.22")
     runtimeOnly("ch.qos.logback:logback-classic:1.1.3")
@@ -58,16 +51,17 @@ dependencies {
     implementation("org.glassfish.jaxb:jaxb-runtime:2.4.0-b180830.0438")
 
     // test
-    testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation(platform("org.junit:junit-bom:5.5.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
     testImplementation("org.assertj:assertj-core:3.6.1")
     testImplementation("org.mockito:mockito-all:1.10.19")
-    testImplementation("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jdk-http:$jerseyVersion") {
+    testImplementation("org.glassfish.jersey.test-framework.providers:jersey-test-framework-provider-jdk-http") {
         exclude("javax.servlet")
         exclude("junit")
     }
-    testImplementation("org.glassfish.jersey.containers:jersey-container-jdk-http:$jerseyVersion")
-    testImplementation("org.glassfish.jersey.ext:jersey-proxy-client:$jerseyVersion")
+    testImplementation("org.glassfish.jersey.containers:jersey-container-jdk-http")
+    testImplementation("org.glassfish.jersey.ext:jersey-proxy-client")
 }
 
 tasks.compileJava {
