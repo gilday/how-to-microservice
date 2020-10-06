@@ -1,10 +1,9 @@
-package com.johnathangilday;
+package com.johnathangilday.jaxrs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.johnathangilday.jaxrs.GreetingResource;
-import com.johnathangilday.jaxrs.GreetingResourceConfig;
-import com.johnathangilday.jaxrs.ObjectMapperProvider;
+import com.johnathangilday.Greeting;
+import com.johnathangilday.ObjectMapperFactory;
 import javax.ws.rs.core.Application;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.proxy.WebResourceFactory;
@@ -37,13 +36,14 @@ final class GreetingResourceTest extends JerseyTest {
   /**
    * {@inheritDoc}
    *
-   * <p>Configure the JAX-RS client with the smae Jackson configuration used by the server so that
-   * it may deserialize types using the same converntions.
+   * <p>Configure the JAX-RS client with the same Jackson configuration used by the server so that
+   * it may deserialize types using the same conventions.
    */
   @Override
   protected void configureClient(ClientConfig config) {
+    final var mapper = new ObjectMapperFactory().provide();
+    config.register(new ObjectMapperProvider(mapper));
     super.configureClient(config);
-    config.register(new ObjectMapperProvider(new ObjectMapperFactory().provide()));
   }
 
   /**
@@ -69,7 +69,6 @@ final class GreetingResourceTest extends JerseyTest {
     final var target = target();
     final var greetings = WebResourceFactory.newResource(GreetingResource.class, target);
     final var greeting = greetings.get();
-    assertThat(greeting.getMessage()).isEqualTo("hello");
-    assertThat(greeting.getAudience()).isEqualTo("world");
+    assertThat(greeting).isEqualTo(Greeting.of("hello", "world"));
   }
 }
